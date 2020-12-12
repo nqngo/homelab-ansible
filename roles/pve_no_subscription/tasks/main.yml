@@ -1,0 +1,11 @@
+---
+- name: Remove pve-enterprise apt repo
+  file:
+    path: /etc/apt/sources.list.d/pve-enterprise.list
+    state: absent
+
+- name: Add pve-no-subscription apt repo
+  copy:
+    src: pve-no-subscription.list
+    dest: /etc/apt/sources.list.d/pve-no-subscription.list
+    mode: 0644

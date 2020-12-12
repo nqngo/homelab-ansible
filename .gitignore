@@ -1,0 +1,5 @@
+*.retry
+
+# Ignore inventory files
+*.ini
+!example.ini
