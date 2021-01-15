@@ -1,0 +1,3 @@
+---
+reboot_retry_time: 60
+reboot_timeout: 300

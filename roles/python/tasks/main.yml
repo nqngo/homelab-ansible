@@ -1,0 +1,4 @@
+---
+# Setup python environment
+- include: install.yml
+- include: configure.yml

@@ -1,6 +1,0 @@
----
-- hosts: pve
-  gather_facts: yes
-
-  roles:
-  - role: pve_no_subscription

@@ -1,0 +1,9 @@
+---
+dell_linux_omsa_repo: "http://linux.dell.com/repo/community/openmanage/940"
+dell_linux_ism_repo: "http://linux.dell.com/repo/community/openmanage/iSM/351"
+dell_linux_distro: "bionic"
+dell_linux_apt_keyserver: "pool.sks-keyservers.net"
+dell_linux_apt_key: "1285491434D8786F"
+ubuntu_repo: "http://archive.ubuntu.com/ubuntu"
+ubuntu_keyserver: "keyserver.ubuntu.com"
+ubuntu_key: "3B4FE6ACC0B21F32"

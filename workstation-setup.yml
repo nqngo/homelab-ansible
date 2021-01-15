@@ -1,0 +1,9 @@
+---
+# This playbook configures my workstation for development
+- hosts: workstation
+  gather_facts: yes
+
+  roles:
+  - role: apt_upgrade
+  - role: zsh
+  - role: vim

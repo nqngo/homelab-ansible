@@ -1,1 +1,4 @@
 ---
+pve_cluster_enabled: yes
+pve_cluster_name: 'homelab'
+default_user: 'root'

@@ -1,0 +1,30 @@
+---
+- name: Install pygmentize
+  become: true
+  apt:
+    name: python3-pygments
+    update_cache: yes
+    cache_valid_time: 3600
+    state: present
+
+- name: Set user .profile
+  template:
+    src: "profile.j2"
+    dest: "{{ bash_profile_file }}"
+    mode: 0644
+
+- name: Set global variables in .bashrc
+  blockinfile:
+    dest: "{{ bash_rc_file }}"
+    content: "{{ lookup('template', 'templates/_var.j2') }}"
+    state: present
+    insertbefore: "EOF"
+    marker: '# {mark} Shell global variables'
+
+- name: Set PATH in .bashrc
+  blockinfile:
+    dest: "{{ bash_rc_file }}"
+    content: "{{ lookup('template', 'templates/_path.j2') }}"
+    state: present
+    insertbefore: "EOF"
+    marker: "# {mark} Shell set PATH"

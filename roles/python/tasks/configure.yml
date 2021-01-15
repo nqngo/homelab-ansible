@@ -1,0 +1,14 @@
+---
+- name: Set virtualenvwrapper block in .bashrc
+  blockinfile:
+    path: "{{ virtualenvwrapper_shell_file }}"
+    block: |
+      WORKON_HOME={{ virtualenvwrapper_home }}
+      PROJECT_HOME={{ virtualenvwrapper_project }}
+      VIRTUALENVWRAPPER_PYTHON={{ virtualenvwrapper_python }}
+      VIRTUALENVWRAPPER_VIRTUALENV={{ virtualenvwrapper_virtualenv }}
+      . {{ virtualenvwrapper_source }}
+    insertbefore: "EOF"
+    state: present
+    marker: '# {mark} virtualenvwrapper environment'
+    mode: 0600

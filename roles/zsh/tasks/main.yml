@@ -1,0 +1,40 @@
+---
+- name: Install zsh
+  become: yes
+  apt:
+    name: zsh
+    state: present
+
+- name: Touch antigen location
+  become: yes
+  file:
+    path: "{{ zsh_antigen_path }}"
+    state: touch
+    modification_time: preserve
+    access_time: preserve
+    mode: 0644
+
+- name: Download antigen
+  become: yes
+  get_url:
+    url: "{{ zsh_antigen_url }}"
+    dest: "{{ zsh_antigen_path }}"
+    mode: 0644
+
+- name: Configure .zshrc
+  template:
+    src: ".zshrc.j2"
+    dest: "{{ zshrc_path }}"
+    mode: 0600
+
+- name: Configure .antigenrc
+  template:
+    src: ".antigenrc.j2"
+    dest: "{{ zsh_antigenrc_path }}"
+    mode: 0600
+
+- name: Change default user shell to zsh
+  become: yes
+  user:
+    name: "{{ default_user }}"
+    shell: "{{ zsh_bin_path }}"

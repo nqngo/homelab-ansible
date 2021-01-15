@@ -1,0 +1,3 @@
+---
+vimrc_path: '$HOME/.vimrc'
+zsh_antigen_path: '/usr/share/zsh-antigen/antigen.zsh'

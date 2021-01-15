@@ -1,0 +1,6 @@
+---
+zsh_bin_path: "/usr/bin/zsh"
+zshrc_path: '$HOME/.zshrc'
+zsh_antigen_url: 'https://raw.githubusercontent.com/zsh-users/antigen/master/bin/antigen.zsh'
+zsh_antigen_path: '/usr/share/zsh-antigen/antigen.zsh'
+zsh_antigenrc_path: '$HOME/.antigenrc'
