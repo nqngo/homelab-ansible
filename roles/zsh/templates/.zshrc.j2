@@ -17,8 +17,11 @@ setopt notify # return background job immediately
 unsetopt beep # Do not beep on error
 unsetopt nomatch # Do not raise error on nomatch
 
-
 bindkey -e # Use eMac binding
+
+# Set default editor
+export VISUAL=vim
+export EDITOR=vim
 
 # Load Antigen
 source {{ zsh_antigen_path }}

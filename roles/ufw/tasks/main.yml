@@ -1,0 +1,14 @@
+---
+- name: Allow SSH in ufw
+  become: true
+  ufw:
+    rule: allow
+    port: "{{ sshd_port }}"
+    proto: tcp
+    log: yes
+
+- name: Enable ufw
+  become: true
+  ufw:
+    state: enabled
+    policy: reject

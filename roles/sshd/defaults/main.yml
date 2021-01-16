@@ -1,0 +1,7 @@
+---
+sshd_port: "22"
+sshd_x11_forwarding: "no"
+sshd_config_path: "/etc/ssh/sshd_config"
+ssh_user: "{{ default_user }}"
+ssh_key: "https://github.com/{{ default_user }}.keys"
+ssh_key_comment: "{{ default_user_email }}"
