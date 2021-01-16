@@ -32,9 +32,18 @@
     src: ".antigenrc.j2"
     dest: "{{ zsh_antigenrc_path }}"
     mode: 0600
+  notify:
+    - Reset antigen bundles
 
 - name: Change default user shell to zsh
   become: yes
   user:
     name: "{{ default_user }}"
     shell: "{{ zsh_bin_path }}"
+
+- name: Copy p10k.zsh if used
+  copy:
+    src: ".p10k.zsh"
+    dest: "{{ zsh_p10k_path }}"
+    mode: 0644
+  when: zsh_antigen_theme == "romkatv/powerlevel10k"

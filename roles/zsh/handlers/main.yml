@@ -1,0 +1,3 @@
+---
+- name: Reset antigen bundles
+  command: antigen reset

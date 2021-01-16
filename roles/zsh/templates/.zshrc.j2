@@ -25,3 +25,8 @@ source {{ zsh_antigen_path }}
 
 # Load Antigen stuff
 antigen init {{ zsh_antigenrc_path }}
+
+{% if 'romkatv/powerlevel10k' in zsh_antigen_theme %}
+# Load p10k.zsh if used
+[[ ! -f {{ zsh_p10k_path }} ]] || source {{ zsh_p10k_path }}
+{% endif %}
