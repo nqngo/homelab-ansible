@@ -1,0 +1,10 @@
+---
+- name: Generate a new privatekey if not exist
+  command: "wg genkey"
+  register: wg_genkey_private
+  changed_when: false
+
+- name: Set private key fact
+  set_fact:
+    wg_privatekey: "{{ wg_genkey_private.stdout }}"
+  when: wg_genkey_private

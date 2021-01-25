@@ -1,0 +1,11 @@
+---
+wg_port: "51820"
+wg_conf_path: "/etc/wireguard/wg0.conf"
+wg_dns: "8.8.8.8"
+wg_privatekey: ""
+wg_pubkey: ""
+wg_ip: "192.168.2.1"
+wg_nodetype: "client" # set to server for NAT node
+wg_subnet_mask: "24"
+wg_hosts_group: "wg"
+wg_peers: ""

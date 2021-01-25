@@ -1,0 +1,19 @@
+---
+- name: Check if wireguard.conf exist
+  become: yes
+  stat:
+    path: "{{ wg_conf_path }}"
+  register: wgconf_stat
+
+- name: Read existing wireguard.conf content
+  become: yes
+  slurp:
+    src: "{{ wg_conf_path }}"
+  register: wgconf
+  when: wgconf_stat.stat.exists
+
+- name: Check if Privatekey in wireguard.conf
+  become: yes
+  set_fact:
+    wg_privatekey: "{{ wgconf['content'] | b64decode | regex_findall('PrivateKey = (.*)') | first }}"
+  when: wgconf_stat.stat.exists

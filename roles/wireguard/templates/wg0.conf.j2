@@ -1,0 +1,22 @@
+[Interface]
+PrivateKey = {{ wg_privatekey }}
+Address = {{ wg_ip }}/{{ wg_subnet_mask }}
+DNS = {{ wg_dns }}
+ListenPort = {{ wg_port }}
+{% if wg_nodetype == "server" %}
+PostUp   = iptables -A FORWARD -i %i -j ACCEPT; iptables -A FORWARD -o %i -j ACCEPT; iptables -t nat -A POSTROUTING -o {{ ansible_default_ipv4.interface }} -j MASQUERADE
+PostDown = iptables -D FORWARD -i %i -j ACCEPT; iptables -D FORWARD -o %i -j ACCEPT; iptables -t nat -D POSTROUTING -o {{ ansible_default_ipv4.interface }} -j MASQUERADE
+{% for peer in wg_peers %}
+{% if peer.wg_ip != wg_ip %}
+[Peer]
+PublicKey = {{ peer.wg_pubkey }}
+AllowedIPs = {{ peer.wg_ip }}/32
+
+{% endif %}
+{% endfor %}
+{% elif wg_nodetype == "client" %}
+[Peer]
+PublicKey = {{ hub.wg_ip }}
+AllowedIPs = {{ wg_allowed_ip }}
+Endpoint = {{ hub.ansible_fqdn }}:{{ wg_port }}
+{% endif %}

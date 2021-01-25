@@ -1,6 +1,6 @@
 ---
 - name: Allow SSH in ufw
-  become: true
+  become: yes
   ufw:
     rule: allow
     port: "{{ sshd_port }}"
@@ -8,7 +8,8 @@
     log: yes
 
 - name: Enable ufw
-  become: true
+  become: yes
   ufw:
     state: enabled
     policy: reject
+  when: ufw_enabled

@@ -1,0 +1,12 @@
+---
+- name: Derive public key if not exist
+  command:
+    cmd: "wg pubkey"
+    stdin: "{{ wg_privatekey }}"
+  register: wg_genkey_pub
+  changed_when: false
+
+- name: Register public key fact
+  set_fact:
+    wg_pubkey: "{{ wg_genkey_pub.stdout }}"
+  when: wg_genkey_pub

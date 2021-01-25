@@ -4,8 +4,10 @@
   gather_facts: yes
 
   roles:
+  - role: hostname
   - role: apt_upgrade
   - role: zsh
   - role: vim
   - role: ufw
   - role: sshd
+  - role: wireguard

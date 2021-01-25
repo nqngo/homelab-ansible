@@ -1,0 +1,50 @@
+---
+- name: Install wireguard
+  become: yes
+  apt:
+    name: wireguard
+    state: present
+
+- name: Allow wireguard in ufw
+  become: yes
+  ufw:
+    rule: allow
+    port: "{{ wg_port }}"
+    proto: udp
+    log: no
+
+- name: Allow ip_forward on wireguard server
+  become: yes
+  sysctl:
+    name: net.ipv4.ip_forward
+    value: '1'
+    sysctl_set: yes
+    reload: yes
+  when: wg_nodetype == "server"
+
+- name: If privatekey not defined, check in wireguard.conf
+  include_tasks: "check_privatekey.yml"
+  when: wg_privatekey | length == 0
+
+- name: Generate private key if not exist
+  include_tasks: "generate_privatekey.yml"
+  when: wg_privatekey | length == 0
+
+- name: Derive public key if not exist
+  include_tasks: generate_pubkey.yml
+  when: wg_pubkey | length == 0
+
+- name: Set wireguard peers fact
+  set_fact:
+    wg_peers: "{{ groups[wg_hosts_group] | map('extract', hostvars) }}"
+
+- name: Discover and set wg cluster hub fact
+  set_fact:
+    hub: "{{ wg_peers | selectattr('wg_nodetype', 'search', 'server') | first }}"
+
+- name: Set wireguard.conf
+  become: yes
+  template:
+    src: wg0.conf.j2
+    dest: "{{ wg_conf_path }}"
+    mode: "0644"
