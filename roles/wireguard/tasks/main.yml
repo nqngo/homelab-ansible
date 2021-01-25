@@ -48,3 +48,12 @@
     src: wg0.conf.j2
     dest: "{{ wg_conf_path }}"
     mode: "0644"
+  notify:
+    - reconfigure wireguard
+
+- name: Start wireguard service
+  become: yes
+  service:
+    name: "wg-quick@{{ wg_interface }}"
+    state: started
+    enabled: yes

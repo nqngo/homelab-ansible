@@ -1,0 +1,10 @@
+---
+- name: Restart wireguard
+  become: yes
+  service:
+    name: "wg-quick@{{ wg_interface }}"
+    state: "{{ item }}"
+  loop:
+    - stopped
+    - started
+  listen: "reconfigure wireguard"
