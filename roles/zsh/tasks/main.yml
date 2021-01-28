@@ -5,6 +5,13 @@
     name: zsh
     state: present
 
+- name: Ensure antigen directory
+  become: yes
+  file:
+    path: "{{ zsh_antigen_dir }}"
+    state: directory
+    mode: 0755
+
 - name: Touch antigen location
   become: yes
   file:
