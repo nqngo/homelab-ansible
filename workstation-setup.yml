@@ -11,3 +11,5 @@
   - role: ufw
   - role: sshd
   - role: wireguard
+  - role: fonts
+  - role: github

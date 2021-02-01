@@ -1,0 +1,4 @@
+---
+apt_keyserver: keyserver.ubuntu.com
+gh_apt_keyid: C99B11DEB97541F0
+gh_apt_repo: https://cli.github.com/packages

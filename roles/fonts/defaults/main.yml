@@ -1,0 +1,5 @@
+---
+fonts_dir_path: $HOME/.local/share/fonts
+fonts:
+  - name: Nerd_UbuntuMono.ttf
+    url:  https://github.com/ryanoasis/nerd-fonts/raw/master/patched-fonts/UbuntuMono/Regular/complete/Ubuntu%20Mono%20Nerd%20Font%20Complete.ttf

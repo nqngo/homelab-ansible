@@ -1,0 +1,20 @@
+---
+- name: Add Github CLI key
+  become: yes
+  apt_key:
+    keyserver: "{{ apt_keyserver }}"
+    id: "{{ gh_apt_keyid }}"
+
+- name: Add Github repo
+  become: yes
+  apt_repository:
+    repo: "deb {{ gh_apt_repo }} {{ ansible_distribution_release }} main"
+    filename: gh
+    state: present
+    update_cache: yes
+
+- name: Install Github CLI
+  become: yes
+  apt:
+    name: gh
+    state: present
