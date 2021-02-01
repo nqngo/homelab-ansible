@@ -33,8 +33,3 @@ antigen init {{ zsh_antigenrc_path }}
 # Load p10k.zsh if used
 [[ ! -f {{ zsh_p10k_path }} ]] || source {{ zsh_p10k_path }}
 {% endif %}
-
-# TILIX VTE fix
-if [ $TILIX_ID ] || [ $VTE_VERSION ]; then
-        source /etc/profile.d/vte.sh
-fi

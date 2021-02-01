@@ -1,0 +1,4 @@
+---
+apt_keyserver: keyserver.ubuntu.com
+chrome_apt_keyid: 78BD65473CB3BD13
+chrome_apt_repo: deb http://dl.google.com/linux/chrome/deb/ stable main

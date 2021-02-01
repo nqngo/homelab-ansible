@@ -1,0 +1,20 @@
+---
+- name: Add google-chrome repo key
+  become: yes
+  apt_key:
+    keyserver: "{{ apt_keyserver }}"
+    id: "{{ chrome_apt_keyid }}"
+
+- name: Add google-chrome repo
+  become: yes
+  apt_repository:
+    repo: "{{ chrome_apt_repo }}"
+    state: present
+    filename: google-chrome
+    update_cache: yes
+
+- name: Install google-chrome
+  become: yes
+  apt:
+    name: google-chrome-stable
+    state: present
