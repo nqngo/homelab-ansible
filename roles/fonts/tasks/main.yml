@@ -10,6 +10,7 @@
     path: "{{ fonts_dir_path }}"
     state: directory
     recurse: yes
+    mode: 0755
 
 - name: Install fonts
   get_url:

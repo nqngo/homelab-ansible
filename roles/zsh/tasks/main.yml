@@ -11,6 +11,7 @@
     path: "{{ zsh_antigen_path | dirname }}"
     state: directory
     recurse: yes
+    mode: 0755
 
 - name: Download antigen
   become: yes
