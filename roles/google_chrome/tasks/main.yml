@@ -1,0 +1,27 @@
+---
+- name: Add google-chrome repo key
+  become: yes
+  apt_key:
+    keyserver: "{{ apt_keyserver }}"
+    id: "{{ chrome_apt_keyid }}"
+
+# Because Google Chrome automatically manage the repo
+- name: Check if google-chrome.list is already created
+  stat:
+    path: /etc/apt/source.list.d/google-chrome.list
+  register: chrome_source_file
+
+- name: Add google-chrome repo if not existed
+  become: yes
+  apt_repository:
+    repo: "{{ chrome_apt_repo }}"
+    state: present
+    filename: google-chrome
+    update_cache: yes
+  when: chrome_source_file.stat.exists
+
+- name: Install google-chrome
+  become: yes
+  apt:
+    name: google-chrome-stable
+    state: present

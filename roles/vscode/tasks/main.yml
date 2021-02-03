@@ -1,0 +1,12 @@
+---
+- name: Install vscode
+  become: yes
+  apt:
+    name: code
+    state: present
+
+- name: Configure vscode settings
+  template:
+    src: settings.json.j2
+    dest: "{{ vscode_settings_path }}"
+    mode: 0644

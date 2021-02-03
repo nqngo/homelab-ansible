@@ -12,3 +12,7 @@
   - role: ufw
   - role: sshd
   - role: wireguard
+  - role: fonts
+  - role: github
+  - role: google_chrome
+  - role: vscode

@@ -25,9 +25,10 @@
   # The list of segments shown on the left. Fill it with the most important segments.
   typeset -g POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(
     # =========================[ Line #1 ]=========================
-    # os_icon               # os identifier
+    os_icon                 # os identifier
     dir                     # current directory
     vcs                     # git status
+    openstack_creds         # openstack cred_helpers
     # =========================[ Line #2 ]=========================
     newline                 # \n
     prompt_char             # prompt symbol
@@ -45,7 +46,7 @@
     direnv                  # direnv status (https://direnv.net/)
     asdf                    # asdf version manager (https://github.com/asdf-vm/asdf)
     virtualenv              # python virtual environment (https://docs.python.org/3/library/venv.html)
-    anaconda                # conda environment (https://conda.io/)
+    # anaconda                # conda environment (https://conda.io/)
     pyenv                   # python environment (https://github.com/pyenv/pyenv)
     goenv                   # go environment (https://github.com/syndbg/goenv)
     nodenv                  # node.js version from nodenv (https://github.com/nodenv/nodenv)
@@ -60,7 +61,7 @@
     # java_version          # java version (https://www.java.com/)
     # package               # name@version from package.json (https://docs.npmjs.com/files/package.json)
     rbenv                   # ruby version from rbenv (https://github.com/rbenv/rbenv)
-    rvm                     # ruby version from rvm (https://rvm.io)
+    # rvm                     # ruby version from rvm (https://rvm.io)
     fvm                     # flutter version management (https://github.com/leoafarias/fvm)
     luaenv                  # lua version from luaenv (https://github.com/cehoffman/luaenv)
     jenv                    # java version from jenv (https://github.com/jenv/jenv)
@@ -175,7 +176,7 @@
   typeset -g POWERLEVEL9K_OS_ICON_FOREGROUND=232
   typeset -g POWERLEVEL9K_OS_ICON_BACKGROUND=7
   # Custom icon.
-  # typeset -g POWERLEVEL9K_OS_ICON_CONTENT_EXPANSION='⭐'
+  typeset -g POWERLEVEL9K_OS_ICON_CONTENT_EXPANSION=''
 
   ################################[ prompt_char: prompt symbol ]################################
   # Transparent background.
@@ -622,7 +623,7 @@
   # Python version from asdf.
   typeset -g POWERLEVEL9K_ASDF_PYTHON_FOREGROUND=0
   typeset -g POWERLEVEL9K_ASDF_PYTHON_BACKGROUND=4
-  # typeset -g POWERLEVEL9K_ASDF_PYTHON_VISUAL_IDENTIFIER_EXPANSION='⭐'
+  typeset -g POWERLEVEL9K_ASDF_PYTHON_VISUAL_IDENTIFIER_EXPANSION='🐍'
   # typeset -g POWERLEVEL9K_ASDF_PYTHON_SHOW_ON_UPGLOB='*.foo|*.bar'
 
   # Go version from asdf.
@@ -909,16 +910,16 @@
   ###[ virtualenv: python virtual environment (https://docs.python.org/3/library/venv.html) ]###
   # Python virtual environment color.
   typeset -g POWERLEVEL9K_VIRTUALENV_FOREGROUND=0
-  typeset -g POWERLEVEL9K_VIRTUALENV_BACKGROUND=4
+  typeset -g POWERLEVEL9K_VIRTUALENV_BACKGROUND=82
   # Don't show Python version next to the virtual environment name.
-  typeset -g POWERLEVEL9K_VIRTUALENV_SHOW_PYTHON_VERSION=false
+  typeset -g POWERLEVEL9K_VIRTUALENV_SHOW_PYTHON_VERSION=true
   # If set to "false", won't show virtualenv if pyenv is already shown.
   # If set to "if-different", won't show virtualenv if it's the same as pyenv.
   typeset -g POWERLEVEL9K_VIRTUALENV_SHOW_WITH_PYENV=false
   # Separate environment name from Python version only with a space.
   typeset -g POWERLEVEL9K_VIRTUALENV_{LEFT,RIGHT}_DELIMITER=
   # Custom icon.
-  # typeset -g POWERLEVEL9K_VIRTUALENV_VISUAL_IDENTIFIER_EXPANSION='⭐'
+  typeset -g POWERLEVEL9K_VIRTUALENV_VISUAL_IDENTIFIER_EXPANSION=''
 
   #####################[ anaconda: conda environment (https://conda.io/) ]######################
   # Anaconda environment color.
@@ -1613,6 +1614,10 @@
   # Type `p10k help segment` for documentation and a more sophisticated example.
   function prompt_example() {
     p10k segment -b 1 -f 3 -i '⭐' -t 'hello, %n'
+  }
+
+  function prompt_openstack_creds() {
+    p10k segment -b 1 -f 3 -t "${os_creds}"
   }
 
   # User-defined prompt segments may optionally provide an instant_prompt_* function. Its job

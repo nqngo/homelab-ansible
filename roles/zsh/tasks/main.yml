@@ -5,21 +5,12 @@
     name: zsh
     state: present
 
-- name: Ensure antigen directory
+- name: Ensure antigen directory is present
   become: yes
   file:
-    path: "{{ zsh_antigen_dir }}"
+    path: "{{ zsh_antigen_path | dirname }}"
     state: directory
-    mode: 0755
-
-- name: Touch antigen location
-  become: yes
-  file:
-    path: "{{ zsh_antigen_path }}"
-    state: touch
-    modification_time: preserve
-    access_time: preserve
-    mode: 0644
+    recurse: yes
 
 - name: Download antigen
   become: yes
