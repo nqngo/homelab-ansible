@@ -4,6 +4,11 @@
     repo: deb https://enterprise.proxmox.com/debian/pve buster pve-enterprise
     state: absent
 
+- name: Delete pve-enterprise file
+  file:
+    path: /etc/apt/sources.list.d/pve-enterprise.list
+    state: absent
+
 - name: Add pve-no-subscription repo
   apt_repository:
     repo: deb http://download.proxmox.com/debian/pve buster pve-no-subscription
