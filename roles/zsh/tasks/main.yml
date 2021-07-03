@@ -6,30 +6,33 @@
     state: present
 
 - name: Ensure antigen directory is present
-  become: yes
   file:
-    path: "{{ zsh_antigen_path | dirname }}"
+    path: "{{ zsh_antigen_dir }}"
     state: directory
-    recurse: yes
     mode: 0755
 
 - name: Download antigen
-  become: yes
   get_url:
     url: "{{ zsh_antigen_url }}"
     dest: "{{ zsh_antigen_path }}"
     mode: 0644
 
 - name: Configure .zshrc
-  template:
-    src: ".zshrc.j2"
-    dest: "{{ zshrc_path }}"
+  blockinfile:
+    create: yes
+    path: "{{ zshrc_path }}"
+    insertbefore: "EOF"
+    marker: '# {mark} ANSIBLE MANAGED ZSH OPTIONS'
+    block: "{{ lookup('template', '.zshrc.j2') }}"
     mode: 0600
 
 - name: Configure .antigenrc
-  template:
-    src: ".antigenrc.j2"
-    dest: "{{ zsh_antigenrc_path }}"
+  blockinfile:
+    create: yes
+    path: "{{ zsh_antigenrc_path }}"
+    insertbefore: "EOF"
+    marker: '# {mark} ANSIBLE MANAGED ANTIGEN OPTIONS'
+    block: "{{ lookup('template', '.antigenrc.j2') }}"
     mode: 0600
   notify:
     - Reset antigen bundles
@@ -44,11 +47,14 @@
   copy:
     src: ".p10k.zsh"
     dest: "{{ zsh_p10k_path }}"
-    mode: 0644
+    mode: 0600
   when: zsh_antigen_theme == "romkatv/powerlevel10k"
 
 - name: Configure .zshenv
-  template:
-    src: ".zshenv.j2"
-    dest: "{{ zshenv_path }}"
-    mode: 0644
+  blockinfile:
+    create: yes
+    path: "{{ zshenv_path }}"
+    insertbefore: "EOF"
+    marker: '# {mark} ANSIBLE MANAGED ENVIRONMENT'
+    block: "{{ lookup('template', '.zshenv.j2') }}"
+    mode: 0600

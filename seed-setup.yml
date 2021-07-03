@@ -3,20 +3,5 @@
   gather_facts: yes
 
   roles:
-  - role: gantsign.antigen
-    users:
-    - username: "{{ ansible_user }}"
-      antigen_libraries:
-      - name: oh-my-zsh
-        env:
-          DISABLE_AUTO_UPDATE: '"true"'
-      antigen_theme:
-        name: romkatv/powerlevel10k
-        env:
-          POWERLEVEL9K_INSTALLATION_DIR: "{{ antigen_home }}/bundles/romkatv/powerlevel10k"
-      antigen_bundles:
-      - name: git
-      - name: pip
-      - name: command-not-found
-      - name: zsh-syntax-highlight
-        url: zsh-users/zsh-syntax-highlighting
+  - role: zsh
+  - role: python

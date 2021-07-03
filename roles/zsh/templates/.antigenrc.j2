@@ -1,14 +1,11 @@
-# Use oh-my-zsh
 antigen use oh-my-zsh
 
-# Load default
 antigen bundle git
 antigen bundle pip
-# Syntax highlighting bundle.
+antigen bundle command-not-found
+antigen bundle zsh-users/zsh-completions
 antigen bundle zsh-users/zsh-syntax-highlighting
 
-# Load theme
 antigen theme {{ zsh_antigen_theme }}
 
-# Commit antigen configuration
 antigen apply
