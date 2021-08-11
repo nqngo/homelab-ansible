@@ -15,5 +15,5 @@
 - name: Install fonts
   get_url:
     url: "{{ item.url }}"
-    dest:  "{{ fonts_dir_path }}/{{ item.name }}"
+    dest: "{{ fonts_dir_path }}/{{ item.name }}"
   with_items: "{{ fonts }}"

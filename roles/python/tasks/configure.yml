@@ -1,7 +1,7 @@
 ---
 - name: Set virtualenvwrapper block in .bashrc
   blockinfile:
-    path: "{{ virtualenvwrapper_shell_file }}"    
+    path: "{{ virtualenvwrapper_shell_file }}"
     insertbefore: "EOF"
     marker: '# {mark} ANSIBLE MANAGED VENV'
     block: "{{ lookup('template', '.zshrc.j2') }}"
