@@ -1,0 +1,10 @@
+---
+# Configure WSL2 host
+- hosts: wsl
+  gather_facts: yes
+
+  roles:
+  - role: zsh
+  - role: python
+  - role: vim
+  - role: wsl_gpg_agent

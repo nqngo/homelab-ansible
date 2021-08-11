@@ -1,0 +1,34 @@
+---
+- name: Install socat
+  become: yes
+  apt:
+    name: socat
+    state: present
+
+- name: Ensure .wsl directory exists
+  file:
+    path: "{{ wsl_dir }}"
+    state: directory
+    mode: '0755'
+
+- name: Soft-link sorelay
+  file:
+    src: "{{ wsl_sorelay_path }}"
+    dest: "{{ wsl_sorelay_dst }}"
+    state: link
+
+- name: Copy WSL GPG-agent script
+  copy:
+    src: ".wsl_gpg_agent.sh"
+    dest: '$HOME'
+    mode: '0700'
+
+- name: Source file
+  blockinfile:
+    path: "{{ virtualenvwrapper_shell_file }}"
+    block: |
+      source $HOME/.wsl_gpg_agent.sh
+    insertbefore: "EOF"
+    state: present
+    marker: '# {mark} wsl-gpg-agent'
+    mode: '0600'

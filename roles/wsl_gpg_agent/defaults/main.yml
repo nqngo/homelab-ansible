@@ -1,0 +1,5 @@
+---
+windows_user: 'admin'
+wsl_sorelay_path: "/mnt/c/Users/{{ windows_user }}/scoop/apps/win-gpg-agent/current/sorelay.exe"
+wsl_dir: '$HOME/.wsl'
+wsl_sorelay_dst: '$HOME/.wsl/sorelay.exe'
