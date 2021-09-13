@@ -4,6 +4,7 @@
   apt:
     name: zsh
     state: present
+  when: ansible_distribution == "Ubuntu"
 
 - name: Ensure antigen directory is present
   file:
@@ -42,6 +43,7 @@
   user:
     name: "{{ default_user }}"
     shell: "{{ zsh_bin_path }}"
+  when: ansible_distribution == "Ubuntu"
 
 - name: Copy p10k.zsh if used
   copy:
@@ -58,3 +60,4 @@
     marker: '# {mark} ANSIBLE MANAGED ENVIRONMENT'
     block: "{{ lookup('template', '.zshenv.j2') }}"
     mode: 0600
+  when: ansible_distribution == "Ubuntu"

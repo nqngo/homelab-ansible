@@ -3,3 +3,4 @@
 # Ignore inventory files
 *.ini
 !example.ini
+hosts.yaml

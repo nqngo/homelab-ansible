@@ -1,0 +1,8 @@
+---
+- name: Configure OSX CLI environment
+  hosts: darwin
+  gather_facts: yes
+
+  roles:
+  - role: zsh
+  - role: python
