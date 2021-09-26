@@ -11,7 +11,6 @@
     removes: /var/run/reboot-required
   async: "{{ reboot_timeout }}"
   poll: 0
-  ignore_errors: yes
   when: reboot_required.stat.exists
 
 - name: Wait for system to become reachable again

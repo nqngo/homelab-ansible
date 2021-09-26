@@ -58,6 +58,6 @@
     path: "{{ zshenv_path }}"
     insertbefore: "EOF"
     marker: '# {mark} ANSIBLE MANAGED ENVIRONMENT'
-    block: "{{ lookup('template', '.zshenv.j2') }}"
+    block: "{{ lookup('template', '.zshenv.Ubuntu.j2') }}"
     mode: 0600
   when: ansible_distribution == "Ubuntu"

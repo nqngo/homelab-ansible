@@ -1,9 +1,0 @@
----
-- name: Setup Unifi cloud controller server
-  hosts: cloud
-  gather_facts: yes
-
-  roles:
-  # - role: zsh
-  # - role: python
-  - role: docker

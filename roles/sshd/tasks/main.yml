@@ -1,11 +1,5 @@
 ---
-- name: Set SSH authorized_keys
-  authorized_key:
-    user: "{{ ssh_user }}"
-    key: "{{ ssh_key }}"
-    comment: "{{ ssh_key_comment }}"
-
-- name: Implement sshd_config
+- name: Update sshd_config
   become: yes
   template:
     src: sshd_config.j2

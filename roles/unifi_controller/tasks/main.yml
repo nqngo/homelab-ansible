@@ -1,0 +1,69 @@
+---
+- name: Deploy unifi network
+  become: yes
+  docker_network:
+    name: "{{ docker_unifi_network }}"
+
+- name: Setup container data directories
+  become: yes
+  file:
+    path: "{{ item }}"
+    state: "directory"
+    owner: root
+    group: root
+    mode: 0755
+  loop:
+    - "/data/db"
+    - "/data/configdb"
+    - "/unifi/data"
+    - "/unifi/log"
+    - "/unifi/cert"
+    - "/unifi/init.d"
+
+- name: Deploy mongoDB container
+  become: yes
+  docker_container:
+    name: 'unifi_mongo'
+    image: "mongo:{{ docker_unifi_mongodb_tag }}"
+    container_default_behavior: 'no_defaults'
+    networks:
+      - name: "{{ docker_unifi_network }}"
+    restart_policy: 'always'
+    init: no
+    state: 'started'
+    volumes:
+      - 'db:/data/db'
+      - 'dbcfg:/data/configdb'
+
+- name: Deploy unifi controller container
+  become: yes
+  docker_container:
+    name: 'unifi_controller'
+    image: "jacobalberty/unifi:{{ docker_unifi_controller_tag }}"
+    container_default_behavior: 'no_defaults'
+    networks:
+      - name: "{{ docker_unifi_network }}"
+    restart_policy: 'always'
+    init: yes
+    state: 'started'
+    volumes:
+      - 'dir:/unifi'
+      - 'data:/unifi/data'
+      - 'log:/unifi/log'
+      - 'cert:/unifi/cert'
+      - 'init:/unifi/init.d'
+      - 'run:/var/run/unifi'
+      - './backup:/unifi/data/backup'
+    env:
+      DB_URI: 'mongodb://mongo/unifi'
+      STATDB_URI: 'mongodb://mongo/unifi_stat'
+      DB_NAME: 'unifi'
+      TZ: "{{ docker_unifi_tz }}"
+    ports:
+      - "3478:3478/udp"  # STUN
+      - "6789:6789/tcp"  # Speed test
+      - "8080:8080/tcp"  # Device/ controller comm.
+      - "8443:8443/tcp"  # Controller GUI/API as seen in a web browser
+      - "8880:8880/tcp"  # HTTP portal redirection
+      - "8843:8843/tcp"  # HTTPS portal redirection
+      - "10001:10001/udp"  # AP discovery
