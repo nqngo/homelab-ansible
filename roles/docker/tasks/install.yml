@@ -26,4 +26,6 @@
 - name: Install docker SDK pip module
   become: yes
   pip:
-    name: "docker"
+    name:
+      - docker>=5.0.0,<6.0.0
+      - docker-compose>=1.7.0,<2.0.0

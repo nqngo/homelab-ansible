@@ -1,0 +1,6 @@
+---
+- name: Docker-compose up unifi-docker
+  become: yes
+  community.docker.docker_compose:
+    project_src: "{{ unifi_project_path }}"
+    state: present

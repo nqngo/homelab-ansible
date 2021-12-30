@@ -1,7 +1,0 @@
----
-# This playbook configures fresh Proxmox VE nodes for deployment.
-- hosts: pve
-  gather_facts: yes
-
-  roles:
-  - role: pve

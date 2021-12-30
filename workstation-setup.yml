@@ -4,8 +4,6 @@
   gather_facts: yes
 
   roles:
-  - role: hostname
-  - role: apt_upgrade
   - role: zsh
   - role: python
   - role: vim

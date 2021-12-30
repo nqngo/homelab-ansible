@@ -1,5 +1,6 @@
 ---
-docker_unifi_controller_tag: 'latest'
-docker_unifi_mongodb_tag: '3.6'
-docker_unifi_network: 'unifi'
-docker_unifi_tz: 'Australia/Melbourne'
+default_shell: "{{ zsh_bin_path }}"
+unifi_project_name: "unifi"
+unifi_project_path: "{{ virtualenvwrapper_project }}/{{ unifi_project_name }}"
+unifi_docker_version: "v6.5.55"
+unifi_docker_repo_url: "https://github.com/jacobalberty/unifi-docker.git"

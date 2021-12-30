@@ -1,0 +1,12 @@
+---
+- name: Make the unifi-controller project
+  shell: "source {{ zshrc_path }} && mkproject {{ unifi_project_name }}"
+  args:
+    executable: "{{ default_shell }}"
+    creates: "{{ unifi_project_path }}"
+
+- name: Clone jacobalberty/unifi-docker project
+  git:
+    repo: "{{ unifi_docker_repo_url }}"
+    dest: "{{ unifi_project_path }}"
+    version: "{{ unifi_docker_version }}"
