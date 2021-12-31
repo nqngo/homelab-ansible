@@ -4,6 +4,8 @@
   gather_facts: yes
 
   roles:
+  - role: timezone
+  - role: motd
   - role: zsh
   - role: python
   - role: sshd

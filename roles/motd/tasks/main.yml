@@ -1,0 +1,19 @@
+---
+- name: Disable Ubuntu help text in motd
+  become: yes
+  file:
+    path: "/etc/update-motd.d/10-help-text"
+    owner: root
+    group: root
+    mode: "0644"
+  when: ansible_distribution == "Ubuntu"
+
+- name: Add login art to motd if defined
+  become: yes
+  copy:
+    dest: "/etc/update-motd.d/20-login-art"
+    src: "20-login-art-{{ motd_art }}.sh"
+    owner: root
+    group: root
+    mode: "0755"
+  when: motd_art|length > 0
