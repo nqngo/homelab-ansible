@@ -1,0 +1,6 @@
+---
+- name: Docker-compose up nginx
+  become: yes
+  community.docker.docker_compose:
+    project_src: "{{ nginx_project_path }}"
+    state: present

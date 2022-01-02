@@ -1,3 +1,5 @@
 ---
 virtualenvwrapper_virtualenv: "/usr/local/bin/virtualenv"
 virtualenvwrapper_source: "/usr/local/bin/virtualenvwrapper.sh"
+default_user: "admin"
+home_path: "/Users/{{ default_user }}"

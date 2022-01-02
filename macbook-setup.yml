@@ -1,8 +1,10 @@
 ---
-- name: Configure OSX CLI environment
-  hosts: darwin
+- name: Configure Macbooks for CLI
+  hosts: macbooks
   gather_facts: yes
 
   roles:
+  - role: ansible-osx-command-line-tools
   - role: zsh
   - role: python
+  # - role: homebrew

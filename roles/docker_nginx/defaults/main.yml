@@ -1,0 +1,4 @@
+---
+default_shell: "{{ zsh_bin_path }}"
+nginx_project_name: "nginx"
+nginx_project_path: "{{ virtualenvwrapper_project }}/{{ nginx_project_name }}"

@@ -1,0 +1,8 @@
+---
+- name: Make the nginx project
+  shell: "source {{ zshrc_path }} && mkproject {{ nginx_project_name }}"
+  args:
+    executable: "{{ default_shell }}"
+    creates: "{{ nginx_project_path }}"
+
+-

@@ -10,3 +10,9 @@
     repo: "{{ unifi_docker_repo_url }}"
     dest: "{{ unifi_project_path }}"
     version: "{{ unifi_docker_version }}"
+
+- name: Set the docker-compose environment
+  template:
+    src: env.j2
+    dest: "{{ unifi_project_path }}/.env"
+    mode: "0644"

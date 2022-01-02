@@ -10,4 +10,5 @@
   - role: python
   - role: sshd
   - role: docker
-  - role: unifi_controller
+  - role: docker_unifi
+  - role: docker_nginx

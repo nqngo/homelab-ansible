@@ -1,7 +1,8 @@
 ---
+home_path: "/home/{{ default_user }}"
 virtualenvwrapper_python: "/usr/bin/python3"
-virtualenvwrapper_virtualenv: "/home/{{ default_user }}/.local/bin/virtualenv"
-virtualenvwrapper_source: "/home/{{ default_user }}/.local/bin/virtualenvwrapper.sh"
-virtualenvwrapper_home: "/home/{{ default_user }}/.virtualenvs"
-virtualenvwrapper_project: "/home/{{ default_user }}/.projects"
-virtualenvwrapper_shell_file: "/home/{{ default_user }}/.zshrc"
+virtualenvwrapper_virtualenv: "{{ home_path }}/.local/bin/virtualenv"
+virtualenvwrapper_source: "{{ home_path }}/.local/bin/virtualenvwrapper.sh"
+virtualenvwrapper_home: "{{ home_path }}/.virtualenvs"
+virtualenvwrapper_project: "{{ home_path }}/.projects"
+virtualenvwrapper_shell_file: "{{ home_path }}/.zshrc"
