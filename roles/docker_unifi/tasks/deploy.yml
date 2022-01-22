@@ -3,4 +3,5 @@
   become: yes
   community.docker.docker_compose:
     project_src: "{{ unifi_project_path }}"
+    env_file: "{{ unifi_project_path }}/unifi.env"
     state: present

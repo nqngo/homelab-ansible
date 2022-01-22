@@ -14,5 +14,5 @@
 - name: Set the docker-compose environment
   template:
     src: env.j2
-    dest: "{{ unifi_project_path }}/.env"
+    dest: "{{ unifi_project_path }}/unifi.env"
     mode: "0644"
