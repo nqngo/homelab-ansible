@@ -1,0 +1,13 @@
+---
+- include: install.yml
+
+- name: Configure MAAS if this is first run
+  become: yes
+  command:
+    cmd: maas status
+  register: maas_status
+  failed_when: no
+  changed_when: maas_status.stdout == "MAAS is not configured"
+
+- include: first_run.yml
+  when: maas_status.stdout == "MAAS is not configured"

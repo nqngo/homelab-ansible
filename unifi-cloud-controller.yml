@@ -11,4 +11,3 @@
   - role: sshd
   - role: docker
   - role: docker_unifi
-  - role: docker_nginx

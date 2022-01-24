@@ -1,3 +1,4 @@
 ---
 - name: Reset antigen bundles
   command: antigen reset
+  failed_when: no

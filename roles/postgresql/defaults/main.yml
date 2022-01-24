@@ -1,0 +1,4 @@
+---
+psql_aptkey_url: "https://www.postgresql.org/media/keys/ACCC4CF8.asc"
+psql_pg_hba_path: "/etc/postgresql/14/main/pg_hba.conf"
+psql_local_trust_policy: "trust"

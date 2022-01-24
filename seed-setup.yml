@@ -1,7 +1,10 @@
 ---
-- hosts: seed
+- name: Setup homelab seed node
+  hosts: seed
   gather_facts: yes
 
   roles:
   - role: zsh
   - role: python
+  - role: postgresql
+  - role: maas

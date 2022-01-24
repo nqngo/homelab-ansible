@@ -1,0 +1,11 @@
+---
+maas_snap_channel: "3.1/stable"
+maas_psql_db: "maas"
+maas_psql_hostname: "localhost"
+maas_psql_username: "maas"
+maas_psql_password: "maas"
+maas_url: "http://localhost:5240/MAAS"
+maas_db_uri: "postgres://{{ maas_psql_username }}:{{ maas_psql_password }}@{{ maas_psql_hostname }}/{{ maas_psql_db }}"
+maas_admin_name: "maas"
+maas_admin_password: "maas"
+maas_admin_email: "maas@example.com"
