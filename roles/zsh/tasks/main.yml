@@ -1,33 +1,8 @@
 ---
-- name: Install zsh
-  become: true
-  apt:
-    name: zsh
-    state: present
-  when: ansible_distribution == "Ubuntu"
-
-- name: Configure .zshrc
-  blockinfile:
-    create: true
-    path: "{{ zshrc_path }}"
-    insertbefore: "EOF"
-    marker: '# {mark} ANSIBLE MANAGED ZSH OPTIONS'
-    block: "{{ lookup('template', '.zshrc.j2') }}"
-    mode: 0600
-
-- name: Change default user shell to zsh
-  become: true
-  user:
-    name: "{{ default_user }}"
-    shell: "{{ zsh_bin_path }}"
-  when: ansible_distribution == "Ubuntu"
-
-- name: Configure .zshenv
-  blockinfile:
-    create: true
-    path: "{{ zshenv_path }}"
-    insertbefore: "EOF"
-    marker: '# {mark} ANSIBLE MANAGED ENVIRONMENT'
-    block: "{{ lookup('template', '.zshenv.Ubuntu.j2') }}"
-    mode: 0600
-  when: ansible_distribution == "Ubuntu"
+- ansible.builtin.include_tasks: debian.yml
+  when: ansible_distribution == "Ubuntu" or
+        ansible_distribution == "Debian"
+- ansible.builtin.include_tasks: redhat.yml
+  when: ansible_distribution == "CentOS" or
+        ansible_distribution == "RedHat" or
+        ansible_distribution == "Fedora"

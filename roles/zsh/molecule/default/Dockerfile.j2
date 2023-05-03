@@ -1,0 +1,11 @@
+# Dockerfile stanza to fetch image name from molecule
+{% if item.registry is defined %}
+FROM {{ item.registry.url }}/{{ item.image }}
+{% else %}
+FROM {{ item.image }}
+{% endif %}
+# Specify environment
+ENV container=docker
+
+# Install missing python3
+RUN apt update && apt install -y python3 sudo

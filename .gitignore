@@ -2,6 +2,7 @@
 .env*
 *.retry
 venv*
+.vscode
 
 # Ignore inventory files
 *.ini

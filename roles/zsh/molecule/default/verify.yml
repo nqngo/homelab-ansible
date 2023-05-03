@@ -1,0 +1,30 @@
+---
+- name: Verify
+  hosts: all
+  gather_facts: false
+  tasks:
+    - name: Verify that zsh package is installed
+      ansible.builtin.apt:
+        name: zsh
+        state: present
+      check_mode: true
+      register: zsh_package
+
+    - name: Get the login shell
+      ansible.builtin.set_fact:
+        login_shell: "{{ lookup('env', 'SHELL') }}"
+
+    - name: Verify that zsh is the default shell
+      ansible.builtin.assert:
+        that:
+          - login_shell == '/usr/bin/zsh'
+
+    - name: Verify that zshrc file exists
+      ansible.builtin.stat:
+        path: $HOME/.zshrc
+      register: zshrc_file
+
+    - name: Verify that zshenv file exists
+      ansible.builtin.stat:
+        path: $HOME/.zshenv
+      register: zshenv_file

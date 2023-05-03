@@ -1,0 +1,28 @@
+---
+- name: Configure .zshrc
+  ansible.builtin.blockinfile:
+    create: true
+    path: "{{ zshrc_path }}"
+    insertbefore: "EOF"
+    marker: "# {mark} ANSIBLE MANAGED ZSH OPTIONS"
+    block: "{{ lookup('template', '.zshrc.j2') }}"
+    mode: 0600
+
+- name: Get current ansible user if not defined
+  ansible.builtin.command:
+    cmd: whoami
+  register: whoami
+  when: ansible_user is not defined
+  changed_when: "'molecule-idempotence-notest' not in ansible_skip_tags"
+
+- name: Set current ansible user
+  set_fact:
+    ansible_user: "{{ whoami.stdout }}"
+  when: ansible_user is not defined
+  changed_when: "'molecule-idempotence-notest' not in ansible_skip_tags"
+
+- name: Change default user shell to zsh
+  become: true
+  ansible.builtin.user:
+    name: "{{ ansible_user }}"
+    shell: "{{ zsh_bin_path }}"

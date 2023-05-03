@@ -5,6 +5,6 @@
 
   roles:
   - role: zsh
+  - role: oh_my_posh
   - role: python
-  - role: vim
   - role: wsl_gpg_agent

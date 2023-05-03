@@ -2,4 +2,5 @@ tox<4.0
 tox-ansible~=1.8
 molecule>=5.0
 molecule-plugins[docker]
+ansible-compat<4.0
 pre-commit

@@ -1,3 +1,0 @@
----
-default_user: "ubuntu"
-home_dir: "/home/{{ default_user }}"
