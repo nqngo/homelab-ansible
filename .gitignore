@@ -1,4 +1,7 @@
+# Environment and assets
+.env*
 *.retry
+venv*
 
 # Ignore inventory files
 *.ini

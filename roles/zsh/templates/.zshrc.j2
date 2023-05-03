@@ -37,11 +37,3 @@ bindkey -e
 {# Set default editor #}
 export VISUAL=vim
 export EDITOR=vim
-
-{# Load Antigen #}
-source {{ zsh_antigen_path }}
-{# Load Antigen settings #}
-antigen init {{ zsh_antigenrc_path }}
-
-{# Load p10k.zsh #}
-[[ ! -f {{ zsh_p10k_path }} ]] || source {{ zsh_p10k_path }}

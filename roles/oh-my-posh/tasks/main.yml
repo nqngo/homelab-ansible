@@ -1,0 +1,5 @@
+---
+# Run ubuntu tasks if the OS is Ubuntu or Debian
+- import_tasks: debian.yml
+  when: ansible_distribution == "Ubuntu" or
+        ansible_distribution == "Debian"

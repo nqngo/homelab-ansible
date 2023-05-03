@@ -1,60 +1,30 @@
 ---
 - name: Install zsh
-  become: yes
+  become: true
   apt:
     name: zsh
     state: present
   when: ansible_distribution == "Ubuntu"
 
-- name: Ensure antigen directory is present
-  file:
-    path: "{{ zsh_antigen_dir }}"
-    state: directory
-    mode: 0755
-
-- name: Download antigen
-  get_url:
-    url: "{{ zsh_antigen_url }}"
-    dest: "{{ zsh_antigen_path }}"
-    mode: 0644
-
 - name: Configure .zshrc
   blockinfile:
-    create: yes
+    create: true
     path: "{{ zshrc_path }}"
     insertbefore: "EOF"
     marker: '# {mark} ANSIBLE MANAGED ZSH OPTIONS'
     block: "{{ lookup('template', '.zshrc.j2') }}"
     mode: 0600
 
-- name: Configure .antigenrc
-  blockinfile:
-    create: yes
-    path: "{{ zsh_antigenrc_path }}"
-    insertbefore: "EOF"
-    marker: '# {mark} ANSIBLE MANAGED ANTIGEN OPTIONS'
-    block: "{{ lookup('template', '.antigenrc.j2') }}"
-    mode: 0600
-  notify:
-    - Reset antigen bundles
-
 - name: Change default user shell to zsh
-  become: yes
+  become: true
   user:
     name: "{{ default_user }}"
     shell: "{{ zsh_bin_path }}"
   when: ansible_distribution == "Ubuntu"
 
-- name: Copy p10k.zsh if used
-  copy:
-    src: ".p10k.zsh"
-    dest: "{{ zsh_p10k_path }}"
-    mode: 0600
-  when: zsh_antigen_theme == "romkatv/powerlevel10k"
-
 - name: Configure .zshenv
   blockinfile:
-    create: yes
+    create: true
     path: "{{ zshenv_path }}"
     insertbefore: "EOF"
     marker: '# {mark} ANSIBLE MANAGED ENVIRONMENT'

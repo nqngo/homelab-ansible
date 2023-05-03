@@ -2,9 +2,3 @@
 zsh_bin_path: "/usr/bin/zsh"
 zshrc_path: '$HOME/.zshrc'
 zshenv_path: '$HOME/.zshenv'
-zsh_antigen_url: 'https://raw.githubusercontent.com/zsh-users/antigen/master/bin/antigen.zsh'
-zsh_antigen_dir: '$HOME/.antigen'
-zsh_antigen_path: "{{ zsh_antigen_dir }}/antigen.zsh"
-zsh_antigenrc_path: '$HOME/.antigenrc'
-zsh_antigen_theme: 'romkatv/powerlevel10k'
-zsh_p10k_path: '$HOME/.p10k.zsh'

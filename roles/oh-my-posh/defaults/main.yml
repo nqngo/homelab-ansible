@@ -1,0 +1,6 @@
+---
+zsh_bin_path: "/usr/bin/zsh"
+zshrc_path: "$HOME/.zshrc"
+zshenv_path: "$HOME/.zshenv"
+omp_bin_src: "https://github.com/JanDeDobbeleer/oh-my-posh/releases/latest/download/posh-linux-{{ ansible_machine }}"
+omp_bin_dest: "/usr/local/bin/oh-my-posh"
