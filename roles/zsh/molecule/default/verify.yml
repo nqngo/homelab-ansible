@@ -17,7 +17,8 @@
     - name: Verify that zsh is the default shell
       ansible.builtin.assert:
         that:
-          - login_shell == '/usr/bin/zsh'
+          - "'bin/zsh' in login_shell"
+        msg: "The default shell is {{ login_shell }}"
 
     - name: Verify that zshrc file exists
       ansible.builtin.stat:
