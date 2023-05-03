@@ -1,7 +1,7 @@
 ---
 - name: Verify
   hosts: all
-  gather_facts: true
+  gather_facts: false
   tasks:
     - name: Verify that zsh package is installed
       ansible.builtin.apt:
@@ -10,15 +10,10 @@
       check_mode: true
       register: zsh_package
 
-    - name: Get the login shell
-      ansible.builtin.set_fact:
-        login_shell: "{{ lookup('env', 'SHELL') }}"
-
     - name: Verify that zsh is the default shell
-      ansible.builtin.assert:
-        that:
-          - "'bin/zsh' in login_shell"
-        msg: "The default shell is {{ login_shell }}"
+      ansible.builtin.shell: 'grep "$(whoami)" /etc/passwd'
+      register: zsh_shell
+      failed_when: zsh_shell.stdout.find('/bin/zsh') == -1
 
     - name: Verify that zshrc file exists
       ansible.builtin.stat:
