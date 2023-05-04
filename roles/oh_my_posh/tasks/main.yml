@@ -1,5 +1,59 @@
 ---
-# Run ubuntu tasks if the OS is Ubuntu or Debian
-- import_tasks: debian.yml
-  when: ansible_distribution == "Ubuntu" or
-        ansible_distribution == "Debian"
+- name: Check CPU architecture (x86_64)
+  ansible.builtin.set_fact:
+    omp_arch: "amd64"
+  when: ansible_architecture == 'x86_64'
+
+- name: Check CPU architecture (arm64)
+  ansible.builtin.set_fact:
+    omp_arch: "arm64"
+  when: ansible_architecture == 'aarch64'
+
+- name: Check CPU architecture (armhf)
+  ansible.builtin.set_fact:
+    omp_arch: "arm"
+  when: ansible_architecture == 'armhf'
+
+- name: Fail if CPU architecture is not supported
+  ansible.builtin.fail:
+    msg: "Unsupported CPU architecture"
+  when: omp_arch is not defined
+
+- name: Install oh-my-posh
+  become: true
+  ansible.builtin.get_url:
+    url: "{{ omp_bin_src }}-{{ omp_arch }}"
+    dest: "{{ omp_bin_dest }}"
+    mode: 0755
+
+- name: Create oh-my-posh themes directory
+  ansible.builtin.file:
+    path: "{{ omp_theme_dir }}"
+    state: directory
+    mode: 0755
+
+- name: Install unzip
+  ansible.builtin.package:
+    name: unzip
+    state: present
+
+- name: Install oh-my-posh themes
+  ansible.builtin.unarchive:
+    src: "{{ omp_theme_src }}"
+    dest: "{{ omp_theme_dir }}"
+    remote_src: true
+
+- name: Set my own oh-my-posh themes
+  ansible.builtin.copy:
+    src: .mytheme.omp.json
+    dest: $HOME/
+    mode: 0644
+
+- name: Configure shell to use oh-my-posh
+  ansible.builtin.blockinfile:
+    create: true
+    path: "{{ shellrc_path }}"
+    insertbefore: "EOF"
+    marker: '# {mark} ANSIBLE MANAGED OH-MY-POSH OPTIONS'
+    block: "{{ lookup('template', 'rc.j2') }}"
+    mode: 0600

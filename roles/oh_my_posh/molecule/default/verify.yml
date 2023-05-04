@@ -1,0 +1,24 @@
+---
+- name: Verify
+  hosts: all
+  gather_facts: false
+  tasks:
+    - name: Verify that oh-my-posh is installed
+      ansible.builtin.stat:
+        path: /usr/local/bin/oh-my-posh
+      register: oh_my_posh_installed
+      failed_when: oh_my_posh_installed.stat.exists == False
+
+    - name: Verify that .poshthemes is installed
+      ansible.builtin.stat:
+        path: $HOME/.poshthemes
+      register: poshthemes_installed
+      failed_when: poshthemes_installed.stat.exists == False
+
+    - name: Ensure the oh-my-posh is initialised in $HOME/.zshrc
+      ansible.builtin.lineinfile:
+        path: $HOME/.zshrc
+        line: 'eval "$(oh-my-posh init zsh --config $HOME/.mytheme.omp.json)"'
+      when: oh_my_posh_installed.stat.exists == True and poshthemes_installed.stat.exists == True
+      register: oh_my_posh_initialised
+      failed_when: oh_my_posh_initialised.changed == True

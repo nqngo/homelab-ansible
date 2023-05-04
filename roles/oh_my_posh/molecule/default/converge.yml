@@ -1,0 +1,10 @@
+---
+- name: Converge
+  hosts: all
+  tasks:
+    - name: "Include zsh"
+      include_role:
+        name: "zsh"
+    - name: "Include oh_my_posh"
+      include_role:
+        name: "oh_my_posh"
