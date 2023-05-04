@@ -1,5 +1,7 @@
 # Ansible Role: zsh
 
+![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/nqngo/homelab-ansible/role-zsh.yml?label=molecule&logo=docker)
+
 This Ansible role installs the Zsh shell and sets it as the default shell for the ansible user. It also configures `.zshrc` and `.zshenv` with my defaults.
 
 ## Requirements
